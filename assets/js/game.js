@@ -22,16 +22,22 @@ var fightOrSkip = function() {
 };
 
 var fight = function(enemy) {
+    //keep track of who goes first
+    var isPlayerTurn = true;
+    if (Math.random() > .5) {
+        isPlayerTurn = false;
+    }
     //repeat and execute as long as the enemy robots is alive
     while(enemy.health > 0 && playerInfo.health > 0){
-        if (fightOrSkip()) {
+        if (isPlayerTurn) {
+            if (fightOrSkip()) {
             break;
         }
        // remove enemys health by subtracting the amount set in the playerInfo.attack vairable
        var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
        enemy.health = Math.max(0, enemy.health - damage);
        console.log(
-            playerInfo.name + " attacked " + enemyInfo.name + ". " + enemyInfo.name + " now has " + enemy.health + " health remaining."
+            playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining."
        );
         // check enemy health 
         if (enemy.health <= 0 ){
@@ -47,7 +53,7 @@ var fight = function(enemy) {
         var damage = randomNumber(enemy.attack - 3, enemy.attack);
         playerInfo.health = Math.max(0, playerInfo.health - damage);
         console.log(
-            enemyInfo.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
+            enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
         );
         //check players health 
         if (playerInfo.health <= 0) {
@@ -56,6 +62,9 @@ var fight = function(enemy) {
         } else {
             window.alert (playerInfo.name + " still has " + playerInfo.health + " health left.");
         }
+    }
+        //switch turn order for the next round
+        isPlayerTurn = !isPlayerTurn;
     }
 };
 //function to start the game
@@ -136,7 +145,6 @@ var shop = function() {
 // function to generate numeric value
 var randomNumber = function(min, max) {
     var value = Math.floor(Math.random() * (max - min + 1) + min);
-    
     return value;
 };
 var getPlayerName = function() {
