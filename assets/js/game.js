@@ -27,11 +27,11 @@ var fight = function(enemy) {
        var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
        enemy.health = Math.max(0, enemy.health - damage);
        console.log(
-            playerInfo.name + " attacked " + enemyName + ". " + enemyName + " now has " + enemy.health + " health remaining."
+            playerInfo.name + " attacked " + enemyInfo.name + ". " + enemyInfo.name + " now has " + enemy.health + " health remaining."
        );
         // check enemy health 
         if (enemy.health <= 0 ){
-        window.alert(enemyName + " has died!");
+        window.alert(enemyInfo.name + " has died!");
 
         //award player money
          playerInfo.money = playerInfo.money +20;
@@ -43,7 +43,7 @@ var fight = function(enemy) {
         var damage = randomNumber(enemy.attack - 3, enemy.attack);
         playerInfo.health = Math.max(0, playerInfo.health - damage);
         console.log(
-            enemyName + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
+            enemyInfo.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
         );
         //check players health 
         if (playerInfo.health <= 0) {
@@ -58,7 +58,6 @@ var fight = function(enemy) {
 var startGame = function() {
     //reset player stats
    playerInfo.reset();
-
     for (var i = 0; i < enemyInfo.length; i++) {
         if (playerInfo.health > 0) {
             window.alert("Welcome to Robot Gladiators! Round " + ( i + 1));
@@ -137,8 +136,17 @@ var randomNumber = function(min, max) {
     
     return value;
 };
+var getPlayerName = function() {
+    var name= "";
+    while (name === "" || name === null) {
+        name = prompt ("What is your robots name?");
+    }
+    console.log("your robots name is " + name);
+    return name;
+}
+
 var playerInfo = {
-    name: window.prompt("Wht is your robots name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
