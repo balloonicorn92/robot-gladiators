@@ -106,24 +106,23 @@ var playAgainConfirm = window.confirm("Would you like to play again?");
     }
 };
 var shop = function() {
+    debugger;
     // asdk player what they'd like to do
     var shopOptionPrompt = window.prompt(
         "would you like to REFILL your health, UPGRADE you attack, or LEAVE the store? please enter one :'REFIL', 'UPGRADE', 'LEAVE' to make a choice."
     );
+    shopOptionPrompt = parseInt(shopOptionPrompt);
     //use switch to carry out action
     switch (shopOptionPrompt) {
-        case "refill":
-        case "REFILL":
+        case 1:
             //increase players health and decrease money
             playerInfo.refillHealth();
             break;
-        case "upgrade":
-        case "UPGRADE":
+        case 2:
             //increase attack decrease money
             playerInfo.upgradeAttack();
             break;
-        case "leave":
-        case "LEAVE":
+        case 3:
             window.alert("Leaving the store.");
             //do nothing, end function
             break;
